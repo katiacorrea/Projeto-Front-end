@@ -1,0 +1,119 @@
+<meta charset="utf-8">
+<h1>JS: Manipulação da DOM</h1>
+
+<form action=" ">
+    <label for="">
+        * Nome:
+        <br>
+        <input type="text" data-msg="Nome é obrigatório" class="obrigatorio">
+    </label>
+    <label for="">
+        * Email:
+        <br>
+        <input type="text" data-msg="Email é obrigatório" class="obrigatorio">
+    </label>
+    <label for="">
+        * Telefone:
+        <br>
+        <input type="text" data-msg="">
+    </label>
+    <button>Enviar</button>
+</form>
+
+<style>
+    .msg {
+        padding: 15px 25px;
+        border-radius: 5px;
+        background: #f2f2f2;
+        border: 1px solid #ddd;
+    }
+    .msg-error, .destacar {
+        border-color: #db2323;
+        color: #db2323;
+        background: #fff0f0;
+    }
+    .msg-sucesso {
+        border-color: #30cf6c;
+        color: #30cf6c;
+        background: #e3ffee;
+    }
+    label {
+        display: block;
+        margin-bottom: 10px;
+    }
+    form {
+        width: 400px;
+        margin-top: 20px;
+    }
+
+    body {
+        padding: 60px;
+        font-family: Arial, Helvetica, sans-serif;
+    }
+    button{
+        border-radius: 5px;
+        border: none;
+        background: green;
+        color: #fff;
+        padding: 15px 35px;
+    }
+    input {
+        width: 100%;
+        border: 1px solic #ccc;
+        padding: 12px;
+        box-sizing: border-box;
+    }
+
+</style>
+
+<script>
+    const form = document.querySelector('form'); // Guardar referencia do elemento
+    const divMsg = document.createElement('div');
+    divMsg.classList.add('msg', 'msg-error');
+
+    form.addEventListener('submit', function() {
+        event.preventDefault(); // bloqueia o comportamento padrão (evita que a pagina seja enviada)
+        const camposObrigatorios = form.querySelectorAll('.obrigatorio');
+        const mensagensErro = [];
+        let isFormValido = true;
+
+        camposObrigatorios.forEach(campo => {
+            if (campo.value.trim() === "") {
+                campo.classList.add('destacar');
+                let mensagem = campo.dataset.msg;
+                mensagensErro.push(mensagem);
+                isFormValido = false;
+            }
+            else {
+                campo.classList.remove('destacar');
+            }
+        });
+        console.log(mensagensErro);
+
+        
+        if (isFormValido === false) {
+            //mostrar mensagem de erro
+            divMsg.innerHTML = `
+            <b>Atenção!</b> <br>
+            ${mensagensErro.join("<br>")}
+            `;
+            divMsg.classList.replace('msg-sucesso', 'msg-error');
+        }
+        else {
+            //mostras mensagem de sucesso
+            divMsg.innerText = "Cadastro realizado com sucesso !";
+            divMsg.classList.replace('msg-error', 'msg-sucesso');
+        }
+        //form.prepend(divMsg); // Adiciona divMsg como primeiro filho de form
+        form.append(divMsg); // Adiciona divMsg como ultimo filho de form
+        /*
+        'beforebegin': antes de inicio da tag
+        'afterbegin': depois do inicio da tag
+        'beforeend': antes do fim da tag
+        'afterend': depois da tag de fechamento
+        */
+        //  form.insertAdjacentElement(posicao, elemento);
+        form.insertAdjacentElement('afterend', divMsg);
+    });
+
+</script>

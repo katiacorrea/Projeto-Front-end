@@ -1,0 +1,55 @@
+<meta charset="utf-8">
+<h1>JS: DOM (querySelector e querySelectorAll)</h1>
+<style>
+    p {
+        padding: 15px 25px;
+        border-radius: 5px;
+        background: #f2f2f2;
+        border: 1px solid #ddd;
+    }
+    p.red {
+        border-color: red;
+        color: red;
+        background-color: #fff0f0;
+    }
+</style>
+
+<p>Parágrafo 1</p>
+<p class="red">Parágrafo 2</p>
+<p>Parágrafo 3</p>
+<p>Parágrafo 4</p>
+<p class="red">Parágrafo 5</p>
+<p>Parágrafo 6</p>
+<p class="red">Parágrafo 7</p>
+<p>Parágrafo 8</p>
+<p>Parágrafo 9</p>
+<p id="p10">Parágrafo 10</p>
+
+<script>
+    // querySelector(): retorna sempre o primeiro elemento que atende ao seletor
+    // document.querySelector('#p10').innerHTML = 'Modificado!';
+    // documento.querySelector('#p10').style.fontStyle = 'italic'
+    const p10 = document.querySelector("#p10");
+    p10.innerHTML = 'Modificado!';
+    p10.style.fontStyle = 'italic';
+
+    // querySelectAll() retorna uma lista NodeList de elementos que foram encontrados na estrutura do HTML que atenderam ao seletor
+    const paragrafosRed = document.querySelectorAll('p.red');
+    for(let indice = 0; indice < paragrafosRed.lenght; indice++) {
+        paragrafosRed[indice].innerHTML = "JS modificou isso aqui...";
+    }
+
+    // forEach() é um looping especializado para percorrer listas (Arrays, NodeLists, etc.)
+    // o forEach() recebe sempre uma função com 2 parametros:
+    // 1) o elemento da lista (no caso aqui o <p>)
+    // 2) o indice do elemento na lista (0, 1, 2, etc...) (opicional)   
+    paragrafosRed.forEach(function(item, indice){
+        item.innerHTML = "JS modificou isso aqui com o forEach()";
+    });
+
+    // ES6 - Arrow Funcions
+    paragrafosRed.forEach(paragrafo => paragrafo.innerHTML = "Arrow function alterou aqui...");
+
+
+
+</script>

@@ -1,0 +1,80 @@
+<meta charset="utf-8">
+<h1>jQuery: Navegação da DOM</h1>
+<table>
+    <thead>
+        <tr>
+            <th>Nome:</th>
+            <th>Email:</th>
+            <th>Cidade:</th>
+            <th colspan="2"></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Adriano Fernandes</td>
+            <td>adriano@gmail.com</td>
+            <td>Barueri</td>
+            <td><button class="editar">Editar</button></td>
+            <td><button class="excluir">Excluir</button></td>
+        </tr>
+        <tr>
+                <td>Paula Ribeiro</td>
+                <td>paula@gmail.com</td>
+                <td>Osasco</td>
+                <td><button class="editar">Editar</button></td>
+                <td><button class="excluir">Excluir</button></td>
+        </tr>
+    </tbody>
+</table>
+<style>
+    body {
+        padding: 60px;
+        font-family: Arial, Helvetica, sans-serif;
+    }
+    table {
+        width: 100%;
+        border: 1px solid #ddd;
+        border-collapse: collapse;
+    }
+    th, td {
+        border-bottom: 2px solid #ddd;
+        border-right: 1px solid #ddd;
+        background: #eee;
+        text-align: center;
+        padding: 15px;
+    }   
+    td {
+        background: white;
+        border-block-width: 1px;
+    }
+    td.editavel {
+        border-color: #ffa305;
+        color: #ffa305;
+        background: #fcf6eb;
+    }
+</style>
+
+<script src="jquery.js"></script>
+<script>
+
+    // exclusão de um item
+    $('table').on('click', 'button.excluir', function() {
+        if (confirm("Quer mesmo excluir...")) { // (this) é o button.excluir
+            $(this).closest('tr').remove(); // ancestral mais proximo que seja um <tr>
+
+        }
+   });
+
+   // editar um item
+   $('table').on('click', 'button.editar', function() {
+        if ($(this).text().trim() === 'Editar') {  // (this) é o button.editar
+            $(this).text('Salvar Edição');
+            $(this).parent().prevAll().addClass('editavel').prop('contenteditable', true);
+        }
+        else {
+            $(this).text('Editar');
+            $(this).parent().prevAll().removeClass('editavel').prop('contenteditable', false);
+        }
+    });   
+
+</script>

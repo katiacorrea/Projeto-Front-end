@@ -1,0 +1,48 @@
+<meta charset="utf-8">
+<h1>JS: Eventos</h1>
+<style>
+    button {
+        background: #ddd;
+        padding: 8px 15px;
+    }
+    button.focus {
+        box-shadow: 0 0 10px #db2323;
+    }
+</style>
+
+<button id="btn1">Clique ou Barra de Espaço 1</button>
+<button id="btn2">Click</button>
+<button id="btn3">MouseEnter ou Barra de Espaço</button>
+<button id="btn4">Shift</button>
+
+<script>
+    /* Guardar as referencias dos elementos */
+
+    const btn1 = document.querySelector('#btn1');
+    const btn2 = document.querySelector('#btn2');
+    const btn3 = document.querySelector('#btn3');
+    const btn4 = document.querySelector('#btn4');
+    
+    const clicou = () => alert('Clicou!!!');
+    const mouseOver = () => alert('Mouse está sobre o botão');
+    const barraDeEspaco = (evento) => {
+        if (evento.key === " ") {   
+        alert('Apertou a barra de espaço !');
+        }
+    }
+    const teclaShift = (evento) => {
+        if (evento.key === 'Shift') {
+            alert('Apertou a tecla Shift!');
+        }
+    }
+
+    btn1.addEventListener('click', clicou);
+    bnt1.addEventListener('keypress', barraDeEspaco);
+    btn2.addEventListener('click', clicou);
+    btn3.addEventListener('keypress', barraDeEspaco);
+    btn3.addEventListener('keypress', mouseOver);
+    btn4.addEventListener('keyup', teclaShift);
+
+
+
+</script>

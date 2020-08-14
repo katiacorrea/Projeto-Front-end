@@ -1,0 +1,31 @@
+<meta charset="utf-8">
+<h1>JS: AJAX: Asynchronous JavaScript and XML</h1>
+<button id="btnCarregar">
+    Carregar Conteúdo
+</button>
+<div id="conteudoCarregado">
+    <!-- o conteúdo carregado pelo Ajax será exibido aqui-->
+</div>
+<script>
+    const btnCarregar = document.querySelector('#btnCarregar');
+    const divConteudo = document.querySelector('#conteudoCarregado')
+    btnCarregar.addEventListener('click', () => {
+        const xhr = new XMLHttpRequest();
+        // 1 parametro = metodo HTTP (POST, GET, PUT, DELETE)
+        // 2 parametro = URL
+        // 3 parametro (opicional) = se a requisição será sincrona ou assincrona (boolean)
+        xhr.open('GET', 'http://jhonatanjacinto.com/teste.php');
+        xhr.send();
+        divConteudo.textContent = "Carregando...";
+        btnCarregar.disabled = true;
+       
+        xhr.addEventListener('load', () => {
+        divConteudo.innerHTML = xhr.response;
+        btnCarregar.disabled = false;
+        });
+        xhr.addEventListener('error', () => {
+            alert('Não foi possível carregar as informações!');
+        })
+    });
+
+</script>

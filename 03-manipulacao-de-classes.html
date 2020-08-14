@@ -1,0 +1,44 @@
+<meta charset="utf-8">
+<h1>JS: Manipulação de Classes</h1>
+<style>
+    button {
+        background: #ddd;
+        padding: 8px 15px;
+    }
+    button.red {
+        background: #fff0f0;
+        border: 1px solid #db2323;
+    }
+</style>
+
+    <button id="btn1">Adiciona classe RED</button>
+    <button id="btn2" class="red">Remove classe RED</button>
+    <button id="btn3">Adiciona ou Remove a classe RED</button>
+    <button id="btn4" class="red">Tem a classe Red</button>
+
+<script>
+    /* Guardar as referencias dos elementos */
+    const btn1 = document.querySelector('#btn1');
+    const btn2 = document.querySelector('#btn2');
+    const btn3 = document.querySelector('#btn3');
+    const btn4 = document.querySelector('#btn4');
+
+    // btn é this - Arrow Function não guarda escopo de this por padrão
+    btn1.onclick = function() {
+        btn1.onclick = () => btn1.classList.add('red'); 
+        btn2.onclick = () => btn2.classList.remove('red');
+        btn3.onclick = () => btn3.classList.toggle('red');
+        btn4.onclick = () => {
+            let temAClasse = btn4.classList.contains('red');
+            if (temAClasse) {
+                alert("Sim, o botão tem a classe RED!");
+            }
+            else {
+                alert("Não, o botão não tem a classe RED!");
+            }
+        }
+
+    }
+    // console.log(this); // window
+
+</script>

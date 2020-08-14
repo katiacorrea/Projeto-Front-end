@@ -1,0 +1,27 @@
+<meta charset="utf-8">
+<h1>JS: API fetch do ES6</h1>
+<button id="btnCarregar">
+        Carregar Conteúdo
+    </button>
+    <div id="conteudoCarregado">
+        <!-- o conteúdo carregado pelo Ajax será exibido aqui-->
+    </div>
+<script>
+    const btnCarregar = document.querySelector('#btnCarregar');
+    const divConteudo = document.querySelector('#conteudoCarregado');
+        btnCarregar.onclick = () => {
+            btnCarregar.disabled = true;
+            divConteudo.textContent = 'Carregando...';
+            fetch('http://www.jhonatanjacinto.com/teste.php')
+            .then(respostaServidor => respostaServidor.text())
+            .then(respostaEmHTML => {
+                divConteudo.innerHTML = respostaEmHTML;
+                btnCarregar.disabled = false;
+            })
+            .catch(erro => {
+                alert('Não foi possível carregar as informações');
+                console.log(erro);
+            });
+        }
+
+</script>        

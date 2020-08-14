@@ -1,0 +1,99 @@
+<meta charset="utf-8">
+<h1>JS: variaveis, constantes e escopo</h1>
+<script>
+    /*
+        "use strict" proibe:
+            1) o comando with;
+            2) omissão das palavras-chave var/let/const;
+            3) funções com parâmetros duplicados;
+            4) altera o comportamento da palavra-chave "this;"
+
+    */
+    "use strict";
+    var a = 999;
+    if (true) {
+        var b = a;
+    }
+    console.log(b); //imprime 
+    console.log(window.b === b);
+
+    // Variaveis com "let" guarda escopo
+    let c= 888;
+    if (true) {
+        let d = c;
+        console.log('D: ',d); //ok porque d é acessivel do if
+    }
+    console.log('D: ',d); // ReferenceError: d não esta disponivel aqui
+
+    //Escopo Vazio
+    {
+        dadoMuitoGrande = [
+            { nome: 'Gabriela', idade: 18},
+            { nome: 'Paulo', idade: 23}
+        ];
+        console.log('Trabalha com dados: ', dadoMuitoGrande); //OK
+    }
+    console.log(dadoMuitoGrande); //ReferenceErros: o dado já não está mais disponivel
+
+    // loopings com var
+    for (var e = 0; e <= 5; e++) {
+        console.log('e:', e);
+    }
+    console.log(e); // 6
+
+    // loopings com let
+    for (let f = 0; f <= 5; f++) {
+        console.log('f', f);
+    }
+    // console.log(f); // ReferenceError
+
+    //Constantes - são valores que não podem ser reatribuidos (=)
+    const x = 0;
+    // x = 1;  // TypeError
+    const lista = [12, 'Ola', 'Gato', true, 75.5];
+    console.log('Lista Original: ', lista);
+    lista.push("Pernilongo");
+    lista.unshift('lista: ',lista);
+    lista = "a"; //TypeError
+
+    // Objeto (Object)
+    const pessoa = {
+        nome: 'Henrique Gomes', // propriedade do objeto
+        idade: 18,
+        peso: 67.5,
+        altura: 1.87
+        dizerOla: function() { // método do objeto
+            alert('Olá pessoal!');
+        }
+    };
+    consle.log(pessoa); // Exibe objeto inteiro
+    console.log(pessoa.nome); // exibir somente a propriedade nome
+    pessoa.dizerOla(); // chama o método do objeto pessoa
+
+    pessoa.nome = "Gabriel";
+    console.log("PEssoa: ", pessoa);
+    // pessoa = "Gabriel"; // TypeError: Deu ruim!
+    
+    {
+        //function declaration
+        function foo() {
+            console.log('Testando foo!');
+        }
+
+        //function expression
+        let foo2 = function() {
+            console.log('testando foo2!');
+        }
+        // exporta a função foo() para o escopo global
+        window.foo = foo;
+    }
+    /* foo() depende:
+        se "use strict" está habilitado, não fica disponivel (só dentro do escopo)
+        se "use strict" não está habilitado, fica disponivel globalmente
+    */
+        foo();
+        foo2(); // não é acessivel porque let sempre guarda escopo
+    
+
+
+</script>
